@@ -147,11 +147,40 @@ public class AuthEntity {
         this.userId = userId;
     }
 
+    public AuthEntity(Long id, String name, String password, String email, String companyName, Long phoneNumber, String address, String userImage, String emailStatus, String emailVerifiedAt, String token, Timestamp createdAt, UserType usertype, AuthEntity userId, CompanyEntity companyId) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+        this.email = email;
+        this.companyName = companyName;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.userImage = userImage;
+        this.emailStatus = emailStatus;
+        this.emailVerifiedAt = emailVerifiedAt;
+        this.token = token;
+        this.createdAt = createdAt;
+        this.usertype = usertype;
+        this.userId = userId;
+        this.companyId = companyId;
+    }
+
+    public CompanyEntity getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(CompanyEntity companyId) {
+        this.companyId = companyId;
+    }
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId",referencedColumnName="id",nullable = true )
     private AuthEntity userId;
 
-    @ManyToOne(fetch = Fetch)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "companyId",referencedColumnName="id",nullable = true)
+    private CompanyEntity companyId;
+
+
 
     public AuthEntity() {
     }

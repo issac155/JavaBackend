@@ -135,23 +135,9 @@ public class CompanyEntity {
     public void setTaxId(String taxId) {
         this.taxId = taxId;
     }
-
-    public CompanyEntity(Long id, String companyName, String organizationId, String industry, String businessLocation, String address, String city, String state, String zipCode, Long phoneNumber, String currency, String status, String taxId, String createdAt) {
-        this.id = id;
-        this.companyName = companyName;
-        this.organizationId = organizationId;
-        this.industry = industry;
-        this.businessLocation = businessLocation;
-        this.address = address;
-        this.city = city;
-        this.state = state;
-        this.zipCode = zipCode;
-        this.phoneNumber = phoneNumber;
-        this.currency = currency;
-        this.status = status;
-        this.taxId = taxId;
-        this.createdAt = createdAt;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "companyId",referencedColumnName = "ig",nullable = true)
+    private CompanyEntity companyId;
 
     public CompanyEntity() {
     }
