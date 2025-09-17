@@ -1,16 +1,10 @@
-package com.app.InvoiceJava.Entity;
+package com.app.InvoiceJava.Dto;
 
-import jakarta.persistence.*;
+import com.app.InvoiceJava.Entity.AuthEntity;
 
 import java.sql.Timestamp;
-import java.time.Instant;
 
-@Entity
-@Table(name = "Auth")
-public class AuthEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class AuthDto {
     private Long id;
     private String name;
     private String email;
@@ -23,21 +17,6 @@ public class AuthEntity {
     private String emailVerifiedAt;
     private String token;
     private Timestamp createdAt;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "user_type")
-    private UserType usertype;
-
-    public enum UserType {
-        OWNER,
-        SUBUSER,
-        ADMIN
-    }
-    @PrePersist
-    protected  void onCreate(){
-        Timestamp now = Timestamp.from(Instant.now());
-        this.createdAt = now;
-    }
 
     public Long getId() {
         return id;
@@ -87,7 +66,6 @@ public class AuthEntity {
         this.companyName = companyName;
     }
 
-
     public String getAddress() {
         return address;
     }
@@ -103,8 +81,6 @@ public class AuthEntity {
     public void setUserImage(String userImage) {
         this.userImage = userImage;
     }
-
-
 
     public String getEmailStatus() {
         return emailStatus;
@@ -138,58 +114,18 @@ public class AuthEntity {
         this.createdAt = createdAt;
     }
 
-    public UserType getUsertype() {
-        return usertype;
-    }
-
-    public void setUsertype(UserType usertype) {
-        this.usertype = usertype;
-    }
-
-    public AuthEntity getUserId() {
-        return userId;
-    }
-
-    public void setUserId(AuthEntity userId) {
-        this.userId = userId;
-    }
-
-    public AuthEntity(Long id, String name, String password, String email, String companyName, Long phoneNumber, String address, String userImage, String emailStatus, String emailVerifiedAt, String token, Timestamp createdAt, UserType usertype, AuthEntity userId, CompanyEntity companyId) {
-        this.id = id;
-        this.name = name;
-        this.password = password;
-        this.email = email;
-        this.companyName = companyName;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
-        this.userImage = userImage;
-        this.emailStatus = emailStatus;
-        this.emailVerifiedAt = emailVerifiedAt;
-        this.token = token;
-        this.createdAt = createdAt;
-        this.usertype = usertype;
-        this.userId = userId;
-        this.companyId = companyId;
-    }
-
-    public CompanyEntity getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(CompanyEntity companyId) {
-        this.companyId = companyId;
-    }
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId",referencedColumnName="id",nullable = true )
-    private AuthEntity userId;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "companyId",referencedColumnName="id",nullable = true)
-    private CompanyEntity companyId;
-
-
-
-    public AuthEntity() {
+    public AuthDto(AuthEntity authEntity) {
+        this.id = authEntity.getId();
+        this.name = authEntity.getName();
+        this.email = authEntity.getEmail();
+        this.password = authEntity.getPassword();
+        this.phoneNumber = authEntity.getPhoneNumber();
+        this.companyName = authEntity.getCompanyName();
+        this.address = authEntity.getAddress();
+        this.userImage = authEntity.getUserImage();
+        this.emailStatus = authEntity.getEmailStatus();
+        this.emailVerifiedAt = authEntity.getEmailVerifiedAt();
+        this.token = authEntity.getToken();
+        this.createdAt = authEntity.getCreatedAt();
     }
 }
-

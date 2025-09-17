@@ -2,6 +2,8 @@ package com.app.InvoiceJava.Entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name ="company")
 public class CompanyEntity {
@@ -135,9 +137,35 @@ public class CompanyEntity {
     public void setTaxId(String taxId) {
         this.taxId = taxId;
     }
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "companyId",referencedColumnName = "ig",nullable = true)
-    private CompanyEntity companyId;
+
+    @OneToMany(mappedBy="companyId" ,cascade = CascadeType.ALL,orphanRemoval = true   )
+    private List<AuthEntity> authEntities;
+
+    public List<AuthEntity> getAuthEntities() {
+        return authEntities;
+    }
+
+    public void setAuthEntities(List<AuthEntity> authEntities) {
+        this.authEntities = authEntities;
+    }
+
+    public CompanyEntity(Long id, String organizationId, String companyName, String industry, String address, String businessLocation, String city, String state, String zipCode, Long phoneNumber, String currency, String createdAt, String status, String taxId, List<AuthEntity> authEntities) {
+        this.id = id;
+        this.organizationId = organizationId;
+        this.companyName = companyName;
+        this.industry = industry;
+        this.address = address;
+        this.businessLocation = businessLocation;
+        this.city = city;
+        this.state = state;
+        this.zipCode = zipCode;
+        this.phoneNumber = phoneNumber;
+        this.currency = currency;
+        this.createdAt = createdAt;
+        this.status = status;
+        this.taxId = taxId;
+        this.authEntities = authEntities;
+    }
 
     public CompanyEntity() {
     }
