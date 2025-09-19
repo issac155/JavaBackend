@@ -7,6 +7,7 @@ import com.app.InvoiceJava.Entity.AuthEntity;
 import com.app.InvoiceJava.Entity.CompanyEntity;
 import com.app.InvoiceJava.Repository.AuthRepo;
 import com.app.InvoiceJava.Repository.CompanyRepo;
+import com.app.InvoiceJava.Utils.IdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,14 +21,20 @@ public class CompanyService {
 
     public ResponseDto<CompanyDto> CreateCompany(CompanyEntity company, AuthEntity currentUser) {
         try{
-            companyRepo.save(company);
+
+            String orgId;
+            do{
+                orgId = IdGeneratorUtil.generateOrganizationId();
+            }while (companyRepo.existsByOrganizationId(orgId));
+            company.setOrganizationId(orgId);
+           CompanyEntity saved = companyRepo.save(company);
             currentUser.setCompanyId(company);
             authRepo.save(currentUser);
-            CompanyDto companyDto = new CompanyDto(company);
+            CompanyDto companyDto = new CompanyDto(saved);
             return ResponseDto.created("User created successfully", companyDto);
 
         }catch(Exception e){
-
+            return ResponseDto.internalServerError("company Created",e.getMessage());
         }
 
 

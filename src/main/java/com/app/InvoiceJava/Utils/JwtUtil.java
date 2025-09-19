@@ -2,17 +2,20 @@ package com.app.InvoiceJava.Utils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.context.annotation.Configuration;
 import java.security.Key;
 import java.util.Date;
-
+import io.jsonwebtoken.*;
+import org.springframework.beans.factory.annotation.Value;
 
 @Configuration
-
 public class JwtUtil {
-    private final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    private final Key key;
+
+    public JwtUtil(@Value("${jwt.secret}") String secret) {
+        this.key = Keys.hmacShaKeyFor(secret.getBytes());
+    }
 
     public String generateToken(String email){
         return Jwts.builder().setSubject(email).
