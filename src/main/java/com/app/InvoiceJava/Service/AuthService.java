@@ -41,9 +41,9 @@ public class AuthService {
             if (auth.getAddress() == null || auth.getAddress().trim().isEmpty()) {
                 return ResponseDto.badRequest("address", "Address cannot be empty. ");
             }
-            if (auth.getUserImage() == null || auth.getUserImage().trim().isEmpty()) {
-                return ResponseDto.badRequest("userimage", "User image cannot be empty. ");
-            }
+//            if (auth.getUserImage() == null || auth.getUserImage().trim().isEmpty()) {
+//                return ResponseDto.badRequest("userimage", "User image cannot be empty. ");
+//            }
             if (auth.getUsertype() == null) {
                 return ResponseDto.badRequest("usertype", "User type cannot be empty. ");
             }

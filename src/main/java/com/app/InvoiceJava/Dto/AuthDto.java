@@ -17,6 +17,33 @@ public class AuthDto {
     private String emailVerifiedAt;
     private String token;
     private Timestamp createdAt;
+    private AuthEntity.UserType usertype;  // ✅ Added
+    private Long userId;                   // ✅ Added (only ID to avoid recursion)
+    private Long companyId;                // ✅ Added (only ID to avoid huge response)
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public Long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
+    }
+
+    public AuthEntity.UserType getUsertype() {
+        return usertype;
+    }
+
+    public void setUsertype(AuthEntity.UserType usertype) {
+        this.usertype = usertype;
+    }
 
     public Long getId() {
         return id;
@@ -127,5 +154,9 @@ public class AuthDto {
         this.emailVerifiedAt = authEntity.getEmailVerifiedAt();
         this.token = authEntity.getToken();
         this.createdAt = authEntity.getCreatedAt();
+        this.usertype=authEntity.getUsertype();
+        this.userId = authEntity.getUserId() !=null ?authEntity.getUserId().getId() : null;
+        this.companyId = authEntity.getCompanyId() != null ? authEntity.getCompanyId().getId() : null;
+
     }
 }
