@@ -10,7 +10,6 @@ public class AuthDto {
     private String email;
     private String password;
     private Long phoneNumber;
-    private String companyName;
     private String address;
     private String userImage;
     private String emailStatus;
@@ -85,14 +84,6 @@ public class AuthDto {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
     public String getAddress() {
         return address;
     }
@@ -147,7 +138,6 @@ public class AuthDto {
         this.email = authEntity.getEmail();
         this.password = authEntity.getPassword();
         this.phoneNumber = authEntity.getPhoneNumber();
-        this.companyName = authEntity.getCompanyName();
         this.address = authEntity.getAddress();
         this.userImage = authEntity.getUserImage();
         this.emailStatus = authEntity.getEmailStatus();

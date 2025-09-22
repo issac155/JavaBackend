@@ -13,7 +13,6 @@ public class CompanyEntity {
     private Long id;
     private String organizationId;
     private String companyName;
-    private String industry;
     private String businessLocation;
     private String address;
     private String city;
@@ -24,6 +23,10 @@ public class CompanyEntity {
     private String status;
     private String createdAt;
     private String taxId;
+    private boolean gstStatus;
+    private String gstNumber;
+    private String companyType;
+    private String companyLogo;
 
     public Long getId() {
         return id;
@@ -56,15 +59,6 @@ public class CompanyEntity {
     public void setBusinessLocation(String businessLocation) {
         this.businessLocation = businessLocation;
     }
-
-    public String getIndustry() {
-        return industry;
-    }
-
-    public void setIndustry(String industry) {
-        this.industry = industry;
-    }
-
 
     public String getAddress() {
         return address;
@@ -138,6 +132,38 @@ public class CompanyEntity {
         this.taxId = taxId;
     }
 
+    public boolean isGstStatus() {
+        return gstStatus;
+    }
+
+    public void setGstStatus(boolean gstStatus) {
+        this.gstStatus = gstStatus;
+    }
+
+    public String getGstNumber() {
+        return gstNumber;
+    }
+
+    public void setGstNumber(String gstNumber) {
+        this.gstNumber = gstNumber;
+    }
+
+    public String getCompanyType() {
+        return companyType;
+    }
+
+    public void setCompanyType(String companyType) {
+        this.companyType = companyType;
+    }
+
+    public String getCompanyLogo() {
+        return companyLogo;
+    }
+
+    public void setCompanyLogo(String companyLogo) {
+        this.companyLogo = companyLogo;
+    }
+
     @OneToMany(mappedBy="companyId" ,cascade = CascadeType.ALL,orphanRemoval = true   )
     private List<AuthEntity> authEntities;
 
@@ -149,22 +175,25 @@ public class CompanyEntity {
         this.authEntities = authEntities;
     }
 
-    public CompanyEntity(Long id, String organizationId, String companyName, String industry, String address, String businessLocation, String city, String state, String zipCode, Long phoneNumber, String currency, String createdAt, String status, String taxId, List<AuthEntity> authEntities) {
+
+    public CompanyEntity(Long id, String organizationId, String companyName, String businessLocation, String address, String city, String state, String zipCode, String status, String currency, Long phoneNumber, String createdAt, String taxId, boolean gstStatus, String gstNumber, String companyLogo, String companyType) {
         this.id = id;
         this.organizationId = organizationId;
         this.companyName = companyName;
-        this.industry = industry;
-        this.address = address;
         this.businessLocation = businessLocation;
+        this.address = address;
         this.city = city;
         this.state = state;
         this.zipCode = zipCode;
-        this.phoneNumber = phoneNumber;
-        this.currency = currency;
-        this.createdAt = createdAt;
         this.status = status;
+        this.currency = currency;
+        this.phoneNumber = phoneNumber;
+        this.createdAt = createdAt;
         this.taxId = taxId;
-        this.authEntities = authEntities;
+        this.gstStatus = gstStatus;
+        this.gstNumber = gstNumber;
+        this.companyLogo = companyLogo;
+        this.companyType = companyType;
     }
 
     public CompanyEntity() {

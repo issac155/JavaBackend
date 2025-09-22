@@ -1,12 +1,12 @@
 package com.app.InvoiceJava.Dto;
 
 import com.app.InvoiceJava.Entity.CompanyEntity;
+import org.springframework.web.multipart.MultipartFile;
 
 public class CompanyDto {
     private Long id;
     private String organizationId;
     private String companyName;
-    private String industry;
     private String businessLocation;
     private String address;
     private String city;
@@ -17,12 +17,15 @@ public class CompanyDto {
     private String status;
     private String createdAt;
     private String taxId;
+    private boolean gstStatus;
+    private String gstNumber;
+    private String companyType;
+    private String companyLogo;
 
     public CompanyDto(CompanyEntity companyEntity) {
         this.companyName = companyEntity.getCompanyName();
         this.id = companyEntity.getId();
         this.organizationId = companyEntity.getOrganizationId();
-        this.industry = companyEntity.getIndustry();
         this.businessLocation = companyEntity.getBusinessLocation();
         this.state =companyEntity.getState();
         this.address =companyEntity.getAddress();
@@ -33,6 +36,10 @@ public class CompanyDto {
         this.taxId = companyEntity.getTaxId();
         this.createdAt =companyEntity.getCreatedAt();
         this.status = companyEntity.getStatus();
+        this.gstStatus =companyEntity.isGstStatus();
+        this.gstNumber = companyEntity.getGstNumber();
+        this.companyType =companyEntity.getCompanyType();
+        this.companyLogo =companyEntity.getCompanyLogo();
     }
     public Long getId() {
         return id;
@@ -106,14 +113,6 @@ public class CompanyDto {
         this.address = address;
     }
 
-    public String getIndustry() {
-        return industry;
-    }
-
-    public void setIndustry(String industry) {
-        this.industry = industry;
-    }
-
     public String getBusinessLocation() {
         return businessLocation;
     }
@@ -146,4 +145,35 @@ public class CompanyDto {
         this.taxId = taxId;
     }
 
+    public boolean isGstStatus() {
+        return gstStatus;
+    }
+
+    public void setGstStatus(boolean gstStatus) {
+        this.gstStatus = gstStatus;
+    }
+
+    public String getGstNumber() {
+        return gstNumber;
+    }
+
+    public void setGstNumber(String gstNumber) {
+        this.gstNumber = gstNumber;
+    }
+
+    public String getCompanyType() {
+        return companyType;
+    }
+
+    public void setCompanyType(String companyType) {
+        this.companyType = companyType;
+    }
+
+    public String getCompanyLogo() {
+        return companyLogo;
+    }
+
+    public void setCompanyLogo(String companyLogo) {
+        this.companyLogo = companyLogo;
+    }
 }
