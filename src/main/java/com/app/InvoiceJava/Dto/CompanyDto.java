@@ -1,9 +1,14 @@
 package com.app.InvoiceJava.Dto;
 
+import com.app.InvoiceJava.Config.AppConfig;
 import com.app.InvoiceJava.Entity.CompanyEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.sql.Timestamp;
+
 public class CompanyDto {
+
     private Long id;
     private String organizationId;
     private String companyName;
@@ -15,7 +20,7 @@ public class CompanyDto {
     private Long phoneNumber;
     private String currency;
     private String status;
-    private String createdAt;
+    private Timestamp createdAt;
     private String taxId;
     private boolean gstStatus;
     private String gstNumber;
@@ -39,7 +44,12 @@ public class CompanyDto {
         this.gstStatus =companyEntity.isGstStatus();
         this.gstNumber = companyEntity.getGstNumber();
         this.companyType =companyEntity.getCompanyType();
-        this.companyLogo =companyEntity.getCompanyLogo();
+        if (companyEntity.getCompanyLogo() != null && !companyEntity.getCompanyLogo().isEmpty()) {
+            this.companyLogo = AppConfig.getBaseUrl() + "/uploads/company-logos/" + companyEntity.getCompanyLogo();
+        } else {
+            this.companyLogo = null;
+        }
+
     }
     public Long getId() {
         return id;
@@ -129,11 +139,12 @@ public class CompanyDto {
         this.companyName = companyName;
     }
 
-    public String getCreatedAt() {
+
+    public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 

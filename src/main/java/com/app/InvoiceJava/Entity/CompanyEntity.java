@@ -1,7 +1,8 @@
 package com.app.InvoiceJava.Entity;
 
 import jakarta.persistence.*;
-
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.List;
 
 @Entity
@@ -21,12 +22,18 @@ public class CompanyEntity {
     private Long phoneNumber;
     private String currency;
     private String status;
-    private String createdAt;
+    private Timestamp createdAt;
     private String taxId;
     private boolean gstStatus;
     private String gstNumber;
     private String companyType;
     private String companyLogo;
+
+    @PrePersist
+    protected  void onCreate(){
+        Timestamp now = Timestamp.from(Instant.now());
+        this.createdAt = now;
+    }
 
     public Long getId() {
         return id;
@@ -116,11 +123,11 @@ public class CompanyEntity {
         this.status = status;
     }
 
-    public String getCreatedAt() {
+    public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 
@@ -176,7 +183,7 @@ public class CompanyEntity {
     }
 
 
-    public CompanyEntity(Long id, String organizationId, String companyName, String businessLocation, String address, String city, String state, String zipCode, String status, String currency, Long phoneNumber, String createdAt, String taxId, boolean gstStatus, String gstNumber, String companyLogo, String companyType) {
+    public CompanyEntity(Long id, String organizationId, String companyName, String businessLocation, String address, String city, String state, String zipCode, String status, String currency, Long phoneNumber, Timestamp createdAt, String taxId, boolean gstStatus, String gstNumber, String companyLogo, String companyType) {
         this.id = id;
         this.organizationId = organizationId;
         this.companyName = companyName;

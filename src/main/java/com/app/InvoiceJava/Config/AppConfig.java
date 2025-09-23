@@ -5,13 +5,16 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class AppConfig {
+    private static String baseUrl;
 
     @Value("${app.base-url}")
-    private String baseUrl;
-
-    public String getBaseUrl()  {
+    public void setBaseUrl(String url) {
+        AppConfig.baseUrl = url;
+    }
+    public static String getBaseUrl()  {
     return baseUrl;
     }
 
 
 }
+
