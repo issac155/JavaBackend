@@ -42,6 +42,14 @@ public class StockEntity {
     @JoinColumn(name = "item_inter_state_tax_rate")
     private InterStateTaxEntity interStateTaxRate;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId")
+    private AuthEntity userId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "companyId")
+    private CompanyEntity companyId;
+
     public Long getId() {
         return id;
     }
