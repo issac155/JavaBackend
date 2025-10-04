@@ -1,8 +1,5 @@
 package com.app.InvoiceJava.Entity;
-
-
 import jakarta.persistence.*;
-
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -178,22 +175,24 @@ public class StockEntity {
         this.interStateTaxRate = interStateTaxRate;
     }
 
-    public StockEntity(Long id, String itemType, String itemName, Double itemSellingPrice, Double itemQuantity, String itemUnits, String itemDescription, String itemHsnCode, LocalDate itemExpDate, String itemSacCode, String itemTaxExemption, String itemTaxPreference, String itemStatus, Timestamp createdAt, IntraStateTaxEntity intraStateTaxRate, InterStateTaxEntity interStateTaxRate) {
+    public StockEntity(Long id, String itemName, String itemType, String itemUnits, Double itemSellingPrice, Double itemQuantity, String itemDescription, String itemTaxPreference, String itemHsnCode, String itemSacCode, LocalDate itemExpDate, Timestamp createdAt, String itemStatus, String itemTaxExemption, IntraStateTaxEntity intraStateTaxRate, InterStateTaxEntity interStateTaxRate, AuthEntity userId, CompanyEntity companyId) {
         this.id = id;
-        this.itemType = itemType;
         this.itemName = itemName;
+        this.itemType = itemType;
+        this.itemUnits = itemUnits;
         this.itemSellingPrice = itemSellingPrice;
         this.itemQuantity = itemQuantity;
-        this.itemUnits = itemUnits;
         this.itemDescription = itemDescription;
-        this.itemHsnCode = itemHsnCode;
-        this.itemExpDate = itemExpDate;
-        this.itemSacCode = itemSacCode;
-        this.itemTaxExemption = itemTaxExemption;
         this.itemTaxPreference = itemTaxPreference;
-        this.itemStatus = itemStatus;
+        this.itemHsnCode = itemHsnCode;
+        this.itemSacCode = itemSacCode;
+        this.itemExpDate = itemExpDate;
         this.createdAt = createdAt;
+        this.itemStatus = itemStatus;
+        this.itemTaxExemption = itemTaxExemption;
         this.intraStateTaxRate = intraStateTaxRate;
         this.interStateTaxRate = interStateTaxRate;
+        this.userId = userId;
+        this.companyId = companyId;
     }
 }
