@@ -17,7 +17,8 @@ public class StockService {
     public ResponseDto<StockDto> addStock(StockEntity stock, AuthEntity currentUser) {
    try{
        stock.setItemStatus("0");
-       StockEntity saved = StockRepo.save(stock);
+       StockEntity saved = stockRepo.save(stock);
+
 
    }catch(Exception e){
 
