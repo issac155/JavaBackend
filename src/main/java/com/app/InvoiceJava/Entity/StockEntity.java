@@ -47,6 +47,22 @@ public class StockEntity {
     @JoinColumn(name = "companyId")
     private CompanyEntity companyId;
 
+    public AuthEntity getUserId() {
+        return userId;
+    }
+
+    public void setUserId(AuthEntity userId) {
+        this.userId = userId;
+    }
+
+    public CompanyEntity getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(CompanyEntity companyId) {
+        this.companyId = companyId;
+    }
+
     public Long getId() {
         return id;
     }
