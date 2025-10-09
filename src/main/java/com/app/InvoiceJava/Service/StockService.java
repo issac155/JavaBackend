@@ -3,11 +3,16 @@ package com.app.InvoiceJava.Service;
 import com.app.InvoiceJava.Dto.ResponseDto;
 import com.app.InvoiceJava.Dto.StockDto;
 import com.app.InvoiceJava.Entity.AuthEntity;
+import com.app.InvoiceJava.Entity.InterStateTaxEntity;
 import com.app.InvoiceJava.Entity.StockEntity;
 import com.app.InvoiceJava.Repository.AuthRepo;
+import com.app.InvoiceJava.Repository.InterStateTaxRepo;
+import com.app.InvoiceJava.Repository.IntraStateTaxRepo;
 import com.app.InvoiceJava.Repository.StockRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class StockService {
@@ -18,15 +23,41 @@ public class StockService {
     @Autowired
     private AuthRepo authRepo;
 
+    @Autowired
+    private InterStateTaxRepo interStateTaxRepo;
+
+    @Autowired
+    private IntraStateTaxRepo intraStateTaxRepo;
+
     public ResponseDto<StockDto> addStock(StockEntity stock, AuthEntity currentUser) {
         try {
             Long companyId = authRepo.findCompanyIdByUserId(currentUser.getId());
 
             stock.setItemStatus("0");
             stock.setUserId(currentUser);
-            StockEntity saved = stockRepo.save(stock);
 
-            return ResponseDto.created("Stock created sucessfully",saved);
+            if(currentUser.getCompanyId() !=null){
+                stock.setCompanyId(currentUser.getCompanyId());
+            }
+
+            if("Taxable".equalsIgnoreCase(stock.getItemTaxPreference())){
+                if(stock.getInterStateTaxRate() != null && stock.getInterStateTaxRate().getId()!=null){
+                    Optional<InterStateTaxEntity>interTaxOpt = interStateTaxRepo.findById(stock.getInterStateTaxRate().getId());
+                        if(interTaxOpt.isPresent()){
+                            stock.setInterStateTaxRate(interTaxOpt.get());
+                        }else{
+
+                        }
+
+
+                }
+            }else{
+                stock.setInterStateTaxRate(null);
+                stock.setIntraStateTaxRate(null);
+            }
+            StockEntity saved = stockRepo.save(stock);
+            StockDto stockDto = new StockDto(saved);
+            return ResponseDto.created("Stock created successfully", stockDto);
         } catch (Exception e) {
             return ResponseDto.internalServerError("stock created", e.getMessage());
         }

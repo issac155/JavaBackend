@@ -65,13 +65,16 @@ public class GstEntity {
         this.status = status;
     }
 
-    public GstEntity(Long id, String gstNumber, String businessLegalName, String businessTradeName, LocalDate gstRegtDate, String status) {
+    public GstEntity(Long id, String status, String businessTradeName, LocalDate gstRegtDate, String gstNumber, String businessLegalName) {
         this.id = id;
-        this.gstNumber = gstNumber;
-        this.businessLegalName = businessLegalName;
+        this.status = status;
         this.businessTradeName = businessTradeName;
         this.gstRegtDate = gstRegtDate;
-        this.status = status;
+        this.gstNumber = gstNumber;
+        this.businessLegalName = businessLegalName;
+    }
+
+    public GstEntity() {
     }
 
     @OneToOne

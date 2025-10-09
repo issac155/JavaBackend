@@ -1,16 +1,12 @@
 package com.app.InvoiceJava.Dto;
 
 import com.app.InvoiceJava.Entity.StockEntity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+
 import java.sql.Timestamp;
 import java.time.LocalDate;
 
 public class StockDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String itemType;
     private String itemName;
@@ -25,6 +21,25 @@ public class StockDto {
     private String itemTaxExemption;
     private String itemStatus;
     private Timestamp createdAt;
+    private TaxDetailsDto interStateTax;
+    private TaxDetailsDto intraStateTax;
+
+
+    public TaxDetailsDto getIntraStateTax() {
+        return intraStateTax;
+    }
+
+    public void setIntraStateTax(TaxDetailsDto intraStateTax) {
+        this.intraStateTax = intraStateTax;
+    }
+
+    public TaxDetailsDto getInterStateTax() {
+        return interStateTax;
+    }
+
+    public void setInterStateTax(TaxDetailsDto interStateTax) {
+        this.interStateTax = interStateTax;
+    }
 
     public StockDto(StockEntity stockEntity) {
         this.id = stockEntity.getId();
@@ -41,6 +56,15 @@ public class StockDto {
         this.itemSacCode = stockEntity.getItemSacCode();
         this.itemStatus = stockEntity.getItemStatus();
         this.createdAt = stockEntity.getCreatedAt();
+
+        if(stockEntity.getInterStateTaxRate() !=null){
+            this.interStateTax = new TaxDetailsDto(
+                    stockEntity.getInterStateTaxRate().getId(),
+                    stockEntity.getInterStateTaxRate().getTaxName(),
+                    stockEntity.getInterStateTaxRate().getRate(),
+                    stockEntity.getInterStateTaxRate().getTaxType()
+            );
+        }
     }
 
     public Long getId() {
