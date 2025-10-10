@@ -65,6 +65,15 @@ public class StockDto {
                     stockEntity.getInterStateTaxRate().getTaxType()
             );
         }
+
+        if(stockEntity.getIntraStateTaxRate() !=null){
+            this.intraStateTax = new TaxDetailsDto(
+                    stockEntity.getIntraStateTaxRate().getId(),
+                    stockEntity.getIntraStateTaxRate().getTaxName(),
+                    stockEntity.getIntraStateTaxRate().getRate(),
+                    stockEntity.getIntraStateTaxRate().getTaxType()
+                    );
+        }
     }
 
     public Long getId() {
