@@ -171,7 +171,7 @@ public class CompanyEntity {
         this.companyLogo = companyLogo;
     }
 
-    @OneToOne(mappedBy = "company",cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToOne(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
     private GstEntity gstEntity;
 
     public GstEntity getGstEntity(){
@@ -185,6 +185,7 @@ public class CompanyEntity {
         }
     }
 
+    @OneToMany(mappedBy = "")
 
     @OneToMany(mappedBy="companyId" ,cascade = CascadeType.ALL,orphanRemoval = true   )
     private List<AuthEntity> authEntities;

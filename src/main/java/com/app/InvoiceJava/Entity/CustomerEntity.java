@@ -39,6 +39,30 @@ public class CustomerEntity {
     private String status;
 
 
+    @ManyToOne
+    @JoinColumn(name = "custGstTreatment",referencedColumnName = "id")
+    private GstTreatmentEntity gstTreatmentEntity;
+
+    @ManyToOne
+    @JoinColumn(name = "company",referencedColumnName = "id")
+    private CompanyEntity companyEntity;
+
+    public GstTreatmentEntity getGstTreatmentEntity() {
+        return gstTreatmentEntity;
+    }
+
+    public void setGstTreatmentEntity(GstTreatmentEntity gstTreatmentEntity) {
+        this.gstTreatmentEntity = gstTreatmentEntity;
+    }
+
+    public CompanyEntity getCompanyEntity() {
+        return companyEntity;
+    }
+
+    public void setCompanyEntity(CompanyEntity companyEntity) {
+        this.companyEntity = companyEntity;
+    }
+
     @PrePersist
     protected void onCreate(){
         Timestamp now = Timestamp.from(Instant.now());
