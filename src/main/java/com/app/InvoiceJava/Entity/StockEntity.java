@@ -45,7 +45,7 @@
     
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "companyId")
-        private CompanyEntity companyId;
+        private CompanyEntity companyEntity;
     
         public AuthEntity getUserId() {
             return userId;
@@ -55,14 +55,7 @@
             this.userId = userId;
         }
     
-        public CompanyEntity getCompanyId() {
-            return companyId;
-        }
-    
-        public void setCompanyId(CompanyEntity companyId) {
-            this.companyId = companyId;
-        }
-    
+
         public Long getId() {
             return id;
         }
@@ -191,7 +184,7 @@
             this.interStateTaxRate = interStateTaxRate;
         }
     
-        public StockEntity(Long id, String itemName, String itemType, String itemUnits, Double itemSellingPrice, Double itemQuantity, String itemDescription, String itemTaxPreference, String itemHsnCode, String itemSacCode, LocalDate itemExpDate, Timestamp createdAt, String itemStatus, String itemTaxExemption, IntraStateTaxEntity intraStateTaxRate, InterStateTaxEntity interStateTaxRate, AuthEntity userId, CompanyEntity companyId) {
+        public StockEntity(Long id, String itemName, String itemType, String itemUnits, Double itemSellingPrice, Double itemQuantity, String itemDescription, String itemTaxPreference, String itemHsnCode, String itemSacCode, LocalDate itemExpDate, Timestamp createdAt, String itemStatus, String itemTaxExemption, IntraStateTaxEntity intraStateTaxRate, InterStateTaxEntity interStateTaxRate, AuthEntity userId) {
             this.id = id;
             this.itemName = itemName;
             this.itemType = itemType;
@@ -209,7 +202,6 @@
             this.intraStateTaxRate = intraStateTaxRate;
             this.interStateTaxRate = interStateTaxRate;
             this.userId = userId;
-            this.companyId = companyId;
         }
 
         public StockEntity() {
