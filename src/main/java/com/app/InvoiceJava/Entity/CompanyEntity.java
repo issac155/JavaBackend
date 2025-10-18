@@ -195,6 +195,9 @@ public class CompanyEntity {
     @OneToMany(mappedBy="companyId" ,cascade = CascadeType.ALL,orphanRemoval = true   )
     private List<AuthEntity> authEntities;
 
+    @OneToMany(mappedBy = "companyEntity",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<SalesPersonEntity>salesPersonEntities;
+
     public List<AuthEntity> getAuthEntities() {
         return authEntities;
     }
@@ -203,6 +206,29 @@ public class CompanyEntity {
         this.authEntities = authEntities;
     }
 
+    public List<StockEntity> getStockEntities() {
+        return stockEntities;
+    }
+
+    public void setStockEntities(List<StockEntity> stockEntities) {
+        this.stockEntities = stockEntities;
+    }
+
+    public List<CustomerEntity> getCustomerEntities() {
+        return customerEntities;
+    }
+
+    public void setCustomerEntities(List<CustomerEntity> customerEntities) {
+        this.customerEntities = customerEntities;
+    }
+
+    public List<SalesPersonEntity> getSalesPersonEntities() {
+        return salesPersonEntities;
+    }
+
+    public void setSalesPersonEntities(List<SalesPersonEntity> salesPersonEntities) {
+        this.salesPersonEntities = salesPersonEntities;
+    }
 
     public CompanyEntity(Long id, String organizationId, String companyName, String businessLocation, String address, String city, String state, String zipCode, String status, String currency, Long phoneNumber, Timestamp createdAt, String taxId, boolean gstStatus, String gstNumber, String companyLogo, String companyType) {
         this.id = id;

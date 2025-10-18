@@ -37,7 +37,7 @@ public class StockService {
             stock.setUserId(currentUser);
 
             if(currentUser.getCompanyId() !=null){
-                stock.setCompanyId(currentUser.getCompanyId());
+                stock.setCompanyEntity(currentUser.getCompanyId());
             }
 
             if("Taxable".equalsIgnoreCase(stock.getItemTaxPreference())){
@@ -46,6 +46,7 @@ public class StockService {
                         if(interTaxOpt.isPresent()){
                             stock.setInterStateTaxRate(interTaxOpt.get());
                         }else{
+                            return ResponseDto.notFound("Invalid");
 
                         }
 

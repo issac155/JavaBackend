@@ -183,27 +183,38 @@
         public void setInterStateTaxRate(InterStateTaxEntity interStateTaxRate) {
             this.interStateTaxRate = interStateTaxRate;
         }
-    
-        public StockEntity(Long id, String itemName, String itemType, String itemUnits, Double itemSellingPrice, Double itemQuantity, String itemDescription, String itemTaxPreference, String itemHsnCode, String itemSacCode, LocalDate itemExpDate, Timestamp createdAt, String itemStatus, String itemTaxExemption, IntraStateTaxEntity intraStateTaxRate, InterStateTaxEntity interStateTaxRate, AuthEntity userId) {
+
+        public CompanyEntity getCompanyEntity() {
+            return companyEntity;
+        }
+
+        public void setCompanyEntity(CompanyEntity companyEntity) {
+            this.companyEntity = companyEntity;
+        }
+
+        public StockEntity(Long id, String itemType, String itemUnits, String itemName, Double itemQuantity, Double itemSellingPrice, LocalDate itemExpDate, String itemDescription, String itemHsnCode, String itemSacCode, String itemTaxPreference, String itemTaxExemption, String itemStatus, Timestamp createdAt, CompanyEntity companyEntity, AuthEntity userId, IntraStateTaxEntity intraStateTaxRate, InterStateTaxEntity interStateTaxRate) {
             this.id = id;
-            this.itemName = itemName;
             this.itemType = itemType;
             this.itemUnits = itemUnits;
-            this.itemSellingPrice = itemSellingPrice;
+            this.itemName = itemName;
             this.itemQuantity = itemQuantity;
+            this.itemSellingPrice = itemSellingPrice;
+            this.itemExpDate = itemExpDate;
             this.itemDescription = itemDescription;
-            this.itemTaxPreference = itemTaxPreference;
             this.itemHsnCode = itemHsnCode;
             this.itemSacCode = itemSacCode;
-            this.itemExpDate = itemExpDate;
-            this.createdAt = createdAt;
-            this.itemStatus = itemStatus;
+            this.itemTaxPreference = itemTaxPreference;
             this.itemTaxExemption = itemTaxExemption;
+            this.itemStatus = itemStatus;
+            this.createdAt = createdAt;
+            this.companyEntity = companyEntity;
+            this.userId = userId;
             this.intraStateTaxRate = intraStateTaxRate;
             this.interStateTaxRate = interStateTaxRate;
-            this.userId = userId;
         }
 
         public StockEntity() {
         }
     }
+
+
