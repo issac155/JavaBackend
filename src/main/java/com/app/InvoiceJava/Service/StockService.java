@@ -4,6 +4,7 @@ import com.app.InvoiceJava.Dto.ResponseDto;
 import com.app.InvoiceJava.Dto.StockDto;
 import com.app.InvoiceJava.Entity.AuthEntity;
 import com.app.InvoiceJava.Entity.InterStateTaxEntity;
+import com.app.InvoiceJava.Entity.IntraStateTaxEntity;
 import com.app.InvoiceJava.Entity.StockEntity;
 import com.app.InvoiceJava.Repository.AuthRepo;
 import com.app.InvoiceJava.Repository.InterStateTaxRepo;
@@ -46,16 +47,30 @@ public class StockService {
                         if(interTaxOpt.isPresent()){
                             stock.setInterStateTaxRate(interTaxOpt.get());
                         }else{
-                            return ResponseDto.notFound("Invalid");
+                            return ResponseDto.notFound("Invalid Tax");
 
                         }
+                }else{
+                    stock.setInterStateTaxRate(null);
 
+                }
+
+                if(stock.getIntraStateTaxRate() != null && stock.getIntraStateTaxRate().getId()!=null){
+                    Optional<IntraStateTaxEntity>intraTaxOpt = intraStateTaxRepo.findById(stock.getInterStateTaxRate().getId());
+                    if(intraTaxOpt.isPresent()){
+                        stock.setIntraStateTaxRate(intraTaxOpt.get());
+                    }else{
+                        return ResponseDto.notFound("Invalid Tax");
+
+                    }
 
                 }
             }else{
                 stock.setInterStateTaxRate(null);
                 stock.setIntraStateTaxRate(null);
             }
+
+
             StockEntity saved = stockRepo.save(stock);
             StockDto stockDto = new StockDto(saved);
             return ResponseDto.created("Stock created successfully", stockDto);
