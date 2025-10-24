@@ -75,7 +75,7 @@ public class StockService {
             StockDto stockDto = new StockDto(saved);
             return ResponseDto.created("Stock created successfully", stockDto);
         } catch (Exception e) {
-            return ResponseDto.internalServerError("stock created", e.getMessage());
+            return ResponseDto.internalServerError("Error stock created", e.getMessage());
         }
     }
 }

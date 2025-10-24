@@ -9,10 +9,7 @@ import com.app.InvoiceJava.Service.GstService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/")
@@ -27,6 +24,15 @@ public class GstController {
         ResponseDto<GstDto>response = gstService.createStock(gst,currentUser);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
+
+
+    @GetMapping("/getgst")
+    public ResponseEntity<ResponseDto<GstDto>>GetGst(@RequestPart Authentication authentication){
+        AuthEntity currentUser =(AuthEntity) authentication.getPrincipal();
+        ResponseDto<GstDto>response = gstService.getGst(currentUser);
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
+
 
 
 }
