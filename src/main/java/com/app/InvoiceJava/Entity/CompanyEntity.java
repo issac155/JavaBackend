@@ -29,6 +29,7 @@ public class CompanyEntity {
     private String companyType;
     private String companyLogo;
 
+
     @PrePersist
     protected  void onCreate(){
         Timestamp now = Timestamp.from(Instant.now());

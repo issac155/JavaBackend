@@ -33,6 +33,4 @@ public class GstController {
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
-
-
 }
