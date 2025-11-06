@@ -8,10 +8,11 @@ import com.app.InvoiceJava.Entity.GstEntity;
 import com.app.InvoiceJava.Repository.CompanyRepo;
 import com.app.InvoiceJava.Repository.GstRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-
+@Service
 public class GstService {
     @Autowired
     private GstRepo gstRepo;
@@ -36,7 +37,7 @@ public class GstService {
     public ResponseDto<GstDto> getGst(AuthEntity currentUser) {
 
         try{
-            CompanyEntity company = companyRepo.findByAuthEntity(currentUser);
+            CompanyEntity company = currentUser.getCompanyId(); // ✅ direct relationship
 
             GstEntity gst = gstRepo.findByCompanyEntity(company);
             GstDto gstDto = new GstDto(gst);
