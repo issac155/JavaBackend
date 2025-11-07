@@ -2,6 +2,8 @@ package com.app.InvoiceJava.Dto;
 
 import com.app.InvoiceJava.Config.AppConfig;
 import com.app.InvoiceJava.Entity.CompanyEntity;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.sql.Timestamp;
 
 public class CompanyDto {
@@ -22,7 +24,7 @@ public class CompanyDto {
     private boolean gstStatus;
     private String gstNumber;
     private String companyType;
-    private String companyLogo;
+    private MultipartFile companyLogo;
 
     public CompanyDto(CompanyEntity companyEntity) {
         this.companyName = companyEntity.getCompanyName();
@@ -41,11 +43,13 @@ public class CompanyDto {
         this.gstStatus =companyEntity.isGstStatus();
         this.gstNumber = companyEntity.getGstNumber();
         this.companyType =companyEntity.getCompanyType();
-        if (companyEntity.getCompanyLogo() != null && !companyEntity.getCompanyLogo().isEmpty()) {
-            this.companyLogo = AppConfig.getBaseUrl() + "/uploads/company-logos/" + companyEntity.getCompanyLogo();
-        } else {
+        if(companyEntity.getCompanyLogo() != null && !companyEntity.getCompanyLogo().isEmpty()){
+            this.companyLogo = AppConfig.getBaseUrl()+"/uploads/company-logos/"+ companyEntity.getCompanyLogo();
+
+        }else{
             this.companyLogo = null;
         }
+
 
     }
     public Long getId() {
@@ -177,11 +181,12 @@ public class CompanyDto {
         this.companyType = companyType;
     }
 
-    public String getCompanyLogo() {
+    public MultipartFile getCompanyLogo() {
         return companyLogo;
     }
 
-    public void setCompanyLogo(String companyLogo) {
+    public void setCompanyLogo(MultipartFile companyLogo) {
         this.companyLogo = companyLogo;
     }
+
 }

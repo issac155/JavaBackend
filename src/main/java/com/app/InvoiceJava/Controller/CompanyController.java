@@ -17,8 +17,23 @@ public class CompanyController {
     @Autowired
     private CompanyService companyService;
 
+
+//    @PostMapping(value = "createcompany", consumes = {"multipart/form-data"})
+//    public ResponseEntity<ResponseDto<CompanyDto>> CreateCompany(
+//            @ModelAttribute CompanyEntity company,
+//            @RequestPart(value = "companyLogo", required = false) MultipartFile companyLogo,
+//            Authentication authentication
+//    ) {
+//        AuthEntity currentUser = (AuthEntity) authentication.getPrincipal();
+//        ResponseDto<CompanyDto> response = companyService.CreateCompany(company, companyLogo, currentUser);
+//        return ResponseEntity.status(response.getStatus()).body(response);
+//    }
+
+
     @PostMapping(value = "createcompany",consumes = {"multipart/form-data"})
-    public ResponseEntity<ResponseDto<CompanyDto>>CreateCompany(@RequestPart("company")CompanyEntity company, @RequestPart(value = "companyLogo",required = false)MultipartFile companyLogo, Authentication authentication){
+    public ResponseEntity<ResponseDto<CompanyDto>>CreateCompany(@ModelAttribute CompanyEntity company,
+                                                                @RequestPart(value = "companyLogo",required = false)MultipartFile companyLogo,
+                                                                Authentication authentication){
         AuthEntity currentUser = (AuthEntity) authentication.getPrincipal();
         ResponseDto<CompanyDto>response = companyService.CreateCompany(company,companyLogo,currentUser);
         return ResponseEntity.status(response.getStatus()).body(response);
