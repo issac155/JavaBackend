@@ -2,6 +2,7 @@ package com.app.InvoiceJava.Service;
 
 import com.app.InvoiceJava.Dto.AuthDto;
 import com.app.InvoiceJava.Dto.CompanyDto;
+import com.app.InvoiceJava.Dto.CompanyRequestDto;
 import com.app.InvoiceJava.Dto.ResponseDto;
 import com.app.InvoiceJava.Entity.AuthEntity;
 import com.app.InvoiceJava.Entity.CompanyEntity;
@@ -25,8 +26,22 @@ public class CompanyService {
     private AuthRepo authRepo;
 
 
-    public ResponseDto<CompanyDto> CreateCompany(CompanyEntity company, MultipartFile companyLogo, AuthEntity currentUser) {
+    public ResponseDto<CompanyDto> CreateCompany(CompanyRequestDto request, AuthEntity currentUser) {
         try{
+            CompanyEntity company = new CompanyEntity();
+
+            company.setCompanyName(request.getCompanyName());
+            company.setBusinessLocation(request.getBusinessLocation());
+            company.setAddress(request.getAddress());
+            company.setCity(request.getCity());
+            company.setState(request.getState());
+            company.setZipCode(request.getZipCode());
+            company.setPhoneNumber(request.getPhoneNumber());
+            company.setCurrency(request.getCurrency());
+            company.setTaxId(request.getTaxId());
+            company.setGstStatus(request.isGstStatus());
+            company.setGstNumber(request.getGstNumber());
+            company.setCompanyType(request.getCompanyType());
 
             String orgId;
             do{
@@ -34,7 +49,9 @@ public class CompanyService {
             }while (companyRepo.existsByOrganizationId(orgId));
             company.setOrganizationId(orgId);
             company.setStatus("0");
-            if(companyLogo != null && !companyLogo.isEmpty()){
+            if(request.getCompanyLogo() != null && !request.getCompanyLogo().isEmpty()){
+             MultipartFile companyLogo = request.getCompanyLogo();
+
                 String fileName = System.currentTimeMillis()+"_"+companyLogo.getOriginalFilename();
                 String uploadDir="uploads/company-logos/";
                 Path uploadpath = Paths.get(uploadDir);

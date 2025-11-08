@@ -1,5 +1,6 @@
 package com.app.InvoiceJava.Controller;
 import com.app.InvoiceJava.Dto.CompanyDto;
+import com.app.InvoiceJava.Dto.CompanyRequestDto;
 import com.app.InvoiceJava.Dto.ResponseDto;
 import com.app.InvoiceJava.Entity.AuthEntity;
 import com.app.InvoiceJava.Entity.CompanyEntity;
@@ -18,24 +19,11 @@ public class CompanyController {
     private CompanyService companyService;
 
 
-//    @PostMapping(value = "createcompany", consumes = {"multipart/form-data"})
-//    public ResponseEntity<ResponseDto<CompanyDto>> CreateCompany(
-//            @ModelAttribute CompanyEntity company,
-//            @RequestPart(value = "companyLogo", required = false) MultipartFile companyLogo,
-//            Authentication authentication
-//    ) {
-//        AuthEntity currentUser = (AuthEntity) authentication.getPrincipal();
-//        ResponseDto<CompanyDto> response = companyService.CreateCompany(company, companyLogo, currentUser);
-//        return ResponseEntity.status(response.getStatus()).body(response);
-//    }
-
-
     @PostMapping(value = "createcompany",consumes = {"multipart/form-data"})
-    public ResponseEntity<ResponseDto<CompanyDto>>CreateCompany(@ModelAttribute CompanyEntity company,
-                                                                @RequestPart(value = "companyLogo",required = false)MultipartFile companyLogo,
+    public ResponseEntity<ResponseDto<CompanyDto>>CreateCompany(@ModelAttribute CompanyRequestDto company,
                                                                 Authentication authentication){
         AuthEntity currentUser = (AuthEntity) authentication.getPrincipal();
-        ResponseDto<CompanyDto>response = companyService.CreateCompany(company,companyLogo,currentUser);
+        ResponseDto<CompanyDto>response = companyService.CreateCompany(company,currentUser);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 

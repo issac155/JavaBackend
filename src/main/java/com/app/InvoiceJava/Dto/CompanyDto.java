@@ -24,7 +24,7 @@ public class CompanyDto {
     private boolean gstStatus;
     private String gstNumber;
     private String companyType;
-    private MultipartFile companyLogo;
+    private String companyLogo; // Change from MultipartFile to String
 
     public CompanyDto(CompanyEntity companyEntity) {
         this.companyName = companyEntity.getCompanyName();
@@ -44,9 +44,8 @@ public class CompanyDto {
         this.gstNumber = companyEntity.getGstNumber();
         this.companyType =companyEntity.getCompanyType();
         if(companyEntity.getCompanyLogo() != null && !companyEntity.getCompanyLogo().isEmpty()){
-            this.companyLogo = AppConfig.getBaseUrl()+"/uploads/company-logos/"+ companyEntity.getCompanyLogo();
-
-        }else{
+            this.companyLogo = AppConfig.getBaseUrl() + "/uploads/company-logos/" + companyEntity.getCompanyLogo();
+        } else {
             this.companyLogo = null;
         }
 
@@ -181,12 +180,13 @@ public class CompanyDto {
         this.companyType = companyType;
     }
 
-    public MultipartFile getCompanyLogo() {
+    public String getCompanyLogo() {
         return companyLogo;
     }
 
-    public void setCompanyLogo(MultipartFile companyLogo) {
+    public void setCompanyLogo(String companyLogo) {
         this.companyLogo = companyLogo;
     }
-
 }
+
+
