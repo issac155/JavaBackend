@@ -199,6 +199,17 @@ public class CompanyEntity {
     @OneToMany(mappedBy = "companyEntity",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<SalesPersonEntity>salesPersonEntities;
 
+    @OneToMany(mappedBy = "companyEntity",cascade = CascadeType.ALL,orphanRemoval=true)
+    private List<ItemTaxExemptionEntity> itemTaxExemptionEntities;
+
+    public List<ItemTaxExemptionEntity> getItemTaxExemptionEntities() {
+        return itemTaxExemptionEntities;
+    }
+
+    public void setItemTaxExemptionEntities(List<ItemTaxExemptionEntity> itemTaxExemptionEntities) {
+        this.itemTaxExemptionEntities = itemTaxExemptionEntities;
+    }
+
     public List<AuthEntity> getAuthEntities() {
         return authEntities;
     }

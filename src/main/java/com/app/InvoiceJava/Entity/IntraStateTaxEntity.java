@@ -72,6 +72,18 @@ public class IntraStateTaxEntity {
         this.createdAt = now;
     }
 
+    public CompanyEntity getCompanyEntity() {
+        return companyEntity;
+    }
+
+    public void setCompanyEntity(CompanyEntity companyEntity) {
+        this.companyEntity = companyEntity;
+    }
+
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn(name = "companyId")
+    private CompanyEntity companyEntity;
+
     public IntraStateTaxEntity(Long id, Timestamp createdAt, String status, String taxType, Double rate, String taxName) {
         this.id = id;
         this.createdAt = createdAt;
