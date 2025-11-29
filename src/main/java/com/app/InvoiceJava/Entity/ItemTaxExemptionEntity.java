@@ -84,7 +84,17 @@ public class ItemTaxExemptionEntity {
         Timestamp now = Timestamp.from(Instant.now() );
         this.createdAt = now;
 
+    }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "companyId")
+    private CompanyEntity companyEntity;
 
+    public CompanyEntity getCompanyEntity() {
+        return companyEntity;
+    }
+
+    public void setCompanyEntity(CompanyEntity companyEntity) {
+        this.companyEntity = companyEntity;
     }
 }
