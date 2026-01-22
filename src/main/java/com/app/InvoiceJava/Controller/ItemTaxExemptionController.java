@@ -17,15 +17,17 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("api/")
 public class ItemTaxExemptionController {
 
     @Autowired
     private ItemTaxExemptionService itemTaxExemptionService;
 
-    @PostMapping("/addtaxexm")
+    @PostMapping("addtaxexm")
     public ResponseEntity<ResponseDto <ItemTaxExemptionDto>>AddItemTaxExemption(@RequestPart("itemTaxExemption")ItemTaxExemptionEntity itemTaxExemption, Authentication authentication) {
-        AuthEntity currentUser =(AuthEntity) authentication.getPrincipal();
+        System.out.println("ItemTaxExemption: " + itemTaxExemption);
+
+        AuthEntity currentUser = (AuthEntity) authentication.getPrincipal();
         ResponseDto<ItemTaxExemptionDto>response = itemTaxExemptionService.AddTaxExp(itemTaxExemption,currentUser);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
